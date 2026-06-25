@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/go-lean-sdd.webp" alt="Go Lean SDD" width="480">
+  <img src="assets/go-lean-sdd.webp" alt="Go Lean SDD" width="560">
 </p>
 
 <h1 align="center">Go Lean SDD</h1>
