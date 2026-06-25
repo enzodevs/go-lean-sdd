@@ -58,6 +58,7 @@ Each task: `What · Where · Done-when · Test`. For a task others depend on, ad
 - Mark any knowing shortcut with a `DEFER:` comment naming the ceiling **and** the upgrade path — so the next change knows it's a deliberate limit, not an accident.
 - Commit atomically: one logical change per commit, working tree green.
 - Tests are part of "done," not a follow-up — see §4.
+- For Large work, get a fresh perspective on the diff against the spec before calling it done (a reviewer agent or a clean-context re-read), and iterate until no high-severity issues remain. An independent pass catches what self-review and passing tests miss.
 
 ## 4. Test discipline (non-negotiable)
 

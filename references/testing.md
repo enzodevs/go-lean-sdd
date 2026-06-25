@@ -64,7 +64,7 @@ After the suite is green, prove the tests actually bite. Mutate the new code in 
 - remove an edge-case guard,
 - drop a side effect (skip the write/emit).
 
-If nothing fails, the test is decorative — strengthen the assertion or add the missing case, then revert the mutation. Aim mutations at the riskiest new code (validation, auth, money, state transitions). High-stakes modules: use real mutation tooling if the project has it; otherwise 1–2 by hand is enough to catch vacuous tests.
+If nothing fails, the test is decorative — strengthen the assertion or add the missing case, then revert the mutation. Aim mutations at the riskiest new code (validation, auth, money, state transitions). High-stakes modules: use real mutation tooling if the project has it; otherwise 1–2 by hand is enough to catch vacuous tests. For low-risk glue (UI wiring, plumbing), a reviewer pass plus targeted regression tests can stand in for hand-mutation; reserve literal mutation for high-risk logic.
 
 ## Tooling — fast, batteries-included, mature-enough
 

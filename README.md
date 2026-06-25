@@ -51,6 +51,15 @@ Four phases, applied only as deep as the task earns:
 
 Specify and Execute always run. Design and Tasks switch on only when the work needs them. The full skill lives in [`SKILL.md`](SKILL.md), and the deeper guidance loads on demand from [`references/`](references/).
 
+## Recommended tooling
+
+The skill reaches for two command-line tools when they are present:
+
+- [`code-context-v2`](https://github.com/enzodevs/code-context-v2) (`cc2`) for semantic code search across a project.
+- [`xray`](https://github.com/enzodevs/xray) for reading a file's structure and dependencies before editing.
+
+Neither is required. Without them the skill falls back to ordinary search and file reading; with them, the reuse-first checks are faster and more precise.
+
 ## Credits
 
 Go Lean SDD distills a public benchmark of spec-driven development frameworks, run by Waldemar Neto, down to the parts that earned their keep: auto-sizing, strict test enforcement, tight scope control with delta specs, early surfacing of unknowns, interface contracts, and the reuse-first build ladder.
