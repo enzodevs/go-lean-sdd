@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/go-lean-sdd.webp" alt="Go Lean SDD" width="560">
+  <img src="assets/go-lean-sdd.webp" alt="Go Lean SDD" width="480">
 </p>
 
 <h1 align="center">Go Lean SDD</h1>
@@ -57,6 +57,8 @@ One core file of instructions, not a framework of templates. Depth is earned, no
 ## Credits
 
 Distilled from a public benchmark of spec-driven-development frameworks (benchmark by Waldemar Neto) and the ideas worth keeping from each one studied — auto-sizing and test enforcement, strict scope adherence and delta framing, gray-area surfacing and interface contracts, clarification and parallel markers, and the reuse-first build ladder. The synthesis, and what was deliberately left out, is the point.
+
+The logo features a Go gopher — the mascot created by [Renée French](https://reneefrench.blogspot.com/), licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 ## License
 
