@@ -15,20 +15,21 @@
 
 ---
 
-Go Lean SDD turns a request or PRD into working, tested code. It sizes the process to the task instead of forcing the same ceremony on every change: a one-line fix gets one line of spec; a multi-component feature earns a full spec, design, and task breakdown.
+Go Lean SDD turns a request or PRD into working, tested code. It sizes the process to the task instead of running the same ceremony on every change. A one-line fix gets one line of spec. A multi-component feature earns a full spec, a design, and a task breakdown.
 
 ## Why it exists
 
-Spec-driven frameworks tend to grow heavy — directory trees, status files, multi-step rituals, token-hungry templates — applied whether you are fixing a typo or building a subsystem.
+Spec-driven frameworks tend to grow heavy. You get directory trees, status files, and multi-step rituals applied to every change, whether it is a typo fix or a new subsystem.
 
-In a benchmark of four popular SDD frameworks, a strong model given nothing but a good `AGENTS.md` scored **0.89** — on par with the best framework, at lower token cost. The takeaway: a capable model does not need scaffolding. It needs tight instructions. So this is instructions, not scaffolding.
+A benchmark of four popular SDD frameworks pointed the other way. A strong model given nothing but a good `AGENTS.md` scored 0.89, matching the best framework while spending fewer tokens. That result shaped this skill: a capable model does better with clear, tight instructions than with heavy scaffolding. Go Lean SDD is built around that idea.
 
 ## What it does
 
-- **Sizes planning to the task.** Depth is earned by complexity, never applied by default. Trivial and medium work stays inline; only a large feature produces written artifacts.
-- **Enforces tests that catch regressions.** Every change ships with co-located tests. A discrimination check then mutates the new code to confirm a test actually fails — so you get tests that bite, not tests that pass by construction.
-- **Keeps the repo clean.** No directory trees, no empty scaffolding, no status files that go stale. Durable context lives in one `AGENTS.md`.
-- **Builds on what already exists.** Before writing new code, it climbs a reuse ladder — your project, your dependencies, the standard library, the framework, the platform — and writes new code only when nothing above fits.
+The skill sizes planning to the task. Complexity earns depth, so trivial and medium work stays in the conversation and only a large feature writes anything to disk.
+
+Tests are not optional here. Every change ships with co-located tests, and a discrimination check then mutates the new code to confirm a test actually fails. That is how you tell a test that catches regressions from one that only looks green.
+
+It also keeps the repo clean. There is no scaffolding tree and no status file to go stale, just a single `AGENTS.md` that holds the durable context. Before writing new code, the skill climbs a reuse ladder through your project, your dependencies, the standard library, the framework, and the platform, and it writes something new only when nothing above it fits.
 
 ## Install
 
@@ -36,7 +37,7 @@ In a benchmark of four popular SDD frameworks, a strong model given nothing but 
 git clone https://github.com/enzodevs/go-lean-sdd.git ~/.claude/skills/go-lean-sdd
 ```
 
-Restart your session. The skill surfaces as `/go-lean-sdd` and activates on its own when you plan, design, implement, test, or verify.
+Restart your session. The skill loads on its own when you plan, build, or verify a change, and you can also call it as `/go-lean-sdd`.
 
 ## How it works
 
@@ -44,22 +45,18 @@ Four phases, applied only as deep as the task earns:
 
 | Scope | Specify | Design | Tasks | Execute |
 |---|---|---|---|---|
-| **Trivial** — ≤3 files, one sentence | 1 line inline | — | — | implement + test |
-| **Medium** — clear feature, <10 steps | brief + edge cases | inline | implicit | implement + test per step |
-| **Large** — multi-component / ambiguous | full + requirement IDs | approach + reuse | atomic breakdown | implement + test + verify per task |
+| Trivial (3 files or fewer, one sentence) | one line, inline | skip | skip | implement and test |
+| Medium (clear feature, under 10 steps) | brief, with edge cases | inline | implicit | implement and test each step |
+| Large (multi-component or ambiguous) | full, with requirement IDs | approach and reuse | atomic breakdown | implement, test, and verify each task |
 
-Specify and Execute are always on. Design and Tasks switch on only when complexity demands them. The full skill is in [`SKILL.md`](SKILL.md); deeper guidance loads on demand from [`references/`](references/).
-
-## What makes it different
-
-One core file of instructions, not a framework of templates. Depth is earned, not defaulted. Tests are the gate — nothing is done until real, discriminating tests pass. Nothing is written to disk unless it will actually be reused.
+Specify and Execute always run. Design and Tasks switch on only when the work needs them. The full skill lives in [`SKILL.md`](SKILL.md), and the deeper guidance loads on demand from [`references/`](references/).
 
 ## Credits
 
-Distilled from a public benchmark of spec-driven-development frameworks (benchmark by Waldemar Neto) and the ideas worth keeping from each one studied — auto-sizing and test enforcement, strict scope adherence and delta framing, gray-area surfacing and interface contracts, clarification and parallel markers, and the reuse-first build ladder. The synthesis, and what was deliberately left out, is the point.
+Go Lean SDD distills a public benchmark of spec-driven development frameworks, run by Waldemar Neto, down to the parts that earned their keep: auto-sizing, strict test enforcement, tight scope control with delta specs, early surfacing of unknowns, interface contracts, and the reuse-first build ladder.
 
-The logo features a Go gopher — the mascot created by [Renée French](https://reneefrench.blogspot.com/), licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+The logo features the Go gopher, a mascot created by [Renée French](https://reneefrench.blogspot.com/) and licensed under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
 
 ## License
 
-[Creative Commons Attribution 4.0 International](LICENSE) (CC BY 4.0). Use it, adapt it, build on it — commercial use included. Just credit "Go Lean SDD by rrghost" and link the license.
+[Creative Commons Attribution 4.0 International](LICENSE) (CC BY 4.0). You can share, adapt, and build on it, including commercially, as long as you credit "Go Lean SDD by rrghost" and link the license.
