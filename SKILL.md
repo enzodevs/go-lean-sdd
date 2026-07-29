@@ -42,7 +42,7 @@ Assess scope before doing anything, then apply only what the size needs. Depth i
 
 **SPECIFY — pin down WHAT.**
 - State the requirement in 1–2 sentences. Write acceptance criteria as **Given / When / Then** scenarios — they read as tests, which primes verifiable behavior over implementation detail.
-- Surface gray areas: list assumptions and ambiguities, tagging real unknowns `[NEEDS CLARIFICATION]`. If any would materially change the result, **ask before building** — one focused question at a time, not a wall of them. Don't guess silently.
+- Surface gray areas: list assumptions and ambiguities, tagging real unknowns `[NEEDS CLARIFICATION]`. Before finalizing a Medium or Large spec, present material unresolved decisions through the environment's structured user-question interface when available, otherwise as concise numbered options; include a recommended default and each choice's consequence. Wait for answers, apply them to the spec, remove resolved tags, and confirm the material spec changes before Execute. Skip this checkpoint when no material ambiguity exists.
 
 **DESIGN — pin down HOW (Large only).**
 - Check what already exists first — this project's code (`cc2` to find it, `xray` to read structure), its dependencies, and what your stack or platform already provides as a supported feature. Build on those before adding anything new.
