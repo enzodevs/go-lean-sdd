@@ -29,7 +29,7 @@ The skill sizes planning to the task. Complexity earns depth, so trivial and med
 
 Tests are not optional here. Every change ships with co-located tests, and a discrimination check then mutates the new code to confirm a test actually fails. That is how you tell a test that catches regressions from one that only looks green.
 
-It also keeps the repo clean. There is no scaffolding tree and no status file to go stale, just a single `AGENTS.md` that holds the durable context. Before writing new code, the skill climbs a reuse ladder through your project, your dependencies, the standard library, the framework, and the platform, and it writes something new only when nothing above it fits.
+It also keeps the repo clean. There is no scaffolding tree and no status file to go stale, just a single `AGENTS.md` that holds the durable context. Before writing new code, the skill climbs a reuse ladder through your project, your dependencies, the standard library, the framework, the platform, and mature external systems for non-core domains. It writes something new only when nothing above it fits.
 
 ## Install
 

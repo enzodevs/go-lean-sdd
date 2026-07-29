@@ -13,8 +13,9 @@ Before adding any code or dependency, stop at the first rung that holds:
 3. **Does the language stdlib / runtime do it?** Use it.
 4. **Does a dependency you already have do it?** Use it.
 5. **Does the framework or platform provide it as a supported, maintained feature?** Use that.
-6. **Is it one line?** Write the one line.
-7. **Only now** — write the minimum new code that works.
+6. **For a non-core subsystem, does a mature OSS project, managed service, protocol, or platform product own the hard domain?** Wrap it behind a thin adapter.
+7. **Is it one line?** Write the one line.
+8. **Only now** — write the minimum new code that works.
 
 The discipline isn't "never write code." It's "never write code you didn't first confirm you needed." The shortest working diff wins — but only after you understand the problem.
 
@@ -34,6 +35,22 @@ So scan, in rough order of preference:
 - **Stdlib / runtime / browser** — the environment you're already on ships a lot for free.
 - **Framework built-ins** — auth, validation, jobs, caching, routing are frequently already there.
 - **Managed platform services** — prefer a supported product over hand-rolled infrastructure.
+- **Mature external systems for non-core domains** — document intelligence, OCR, search, auth, billing, observability, queues, ETL, analytics, embeddings infrastructure, and similar commodity-heavy capabilities. The lean move is often to own the router, policy, storage, observability, and adapter boundary, not the hard domain implementation.
+
+## External discovery — lightweight, not a market study
+
+Run this only for non-trivial capabilities that are not the product's differentiator, or when the request smells like a known ecosystem already exists.
+
+1. **Exa semantic search** for fuzzy discovery when keywords are uncertain:
+   `exa-search search "<capability> open source managed service api" --json`
+2. **GitHub structured search** for OSS filtering by popularity/activity/license:
+   `gh search repos "<short keyword phrase>" --sort stars --order desc --limit 10 --json fullName,stargazersCount,description,url,updatedAt,license`
+3. **Shortlist 2–3 candidates** by fit, license, activity, deployment model, integration cost, and risk.
+4. **Inspect with opensrc** only after shortlisting:
+   `opensrc path <owner/repo>` or `opensrc path <pkg>`, then `rg` inside the returned source.
+5. **Build custom only if constraints rule out reuse** — license, data residency, cost, latency, quality, security, operational fit, or product differentiation.
+
+For a document-ingestion memory system, that means searching before implementing PDF/OCR/layout/chunking yourself. A project like Chunkr, Docling, or another document-intelligence API may own that domain; your code should usually own the ingestion router and adapter seam.
 
 **Keep the platform catalog in the project, not the skill.** Which specific managed products *this*
 project should reach for is a per-project fact — record it in the project's own `AGENTS.md`. For example,

@@ -1,6 +1,6 @@
 ---
 name: go-lean-sdd
-description: Lean spec-driven development. Auto-sizes planning depth to task complexity, enforces non-negotiable test verification, and never inflates the repo with scaffolding files. Use when turning a request or PRD into working, tested code — planning a feature, designing an approach, breaking work into tasks, implementing, fixing a bug, or verifying a change. Triggers on "specify", "spec this out", "plan feature", "design", "break into tasks", "implement", "build this", "quick fix", "verify", "is this done".
+description: Proportionate spec-driven delivery for non-trivial software changes, with explicit scope, acceptance criteria, and test verification. Use when the user asks to turn a PRD or feature request into tested code, to plan and implement a multi-file or multi-component change, or to decompose an ambiguous large fix before building it. Do not invoke for routine one-file edits, straightforward bug fixes, explanation or diagnosis-only work, code review, status checks, or simply running existing verification commands. Strong triggers include "spec this feature", "turn this PRD into code", "plan and implement", "design and build", "break this feature into tasks", and explicit `$go-lean-sdd` invocation.
 license: CC-BY-4.0
 metadata:
   author: rrghost
@@ -28,7 +28,7 @@ Assess scope before doing anything, then apply only what the size needs. Depth i
 
 ## 2. Scope discipline (don't bloat)
 
-- **Investigate before you build.** Writing new code is the *last* resort, not the first instinct. Before creating anything, check whether it already exists and is well-supported — in this project (`cc2`), its dependencies, the language's stdlib, the framework's built-ins, or the platform you deploy on. Climb that ladder and stop at the first rung that holds; write new code only when nothing above it fits. (Full ladder + how to apply it per layer: [references/architecture.md](references/architecture.md).)
+- **Investigate before you build.** Writing new code is the *last* resort, not the first instinct. Before creating anything, check whether it already exists and is well-supported — in this project (`cc2`), its dependencies, the language's stdlib, the framework's built-ins, the platform you deploy on, or a mature OSS/managed system for non-core domain work. Climb that ladder and stop at the first rung that holds; write new code only when nothing above it fits. (Full ladder + how to apply it per layer: [references/architecture.md](references/architecture.md).)
 - **Lazy about the solution, never about diligence:** staying lean never justifies cutting input validation, error/data-loss handling, security, or accessibility. Those are always in scope.
 - Build exactly what was asked — no speculative features, no "while I'm here" extras.
 - **Name the boundary:** state what's **in scope** and **out of scope** before building — one line each. Naming the edge prevents scope creep better than any process gate.
@@ -68,7 +68,7 @@ The heart of this skill: real, *discriminating* tests. What separates solid work
 - Test at the right level: unit for logic, integration/e2e for user-visible behavior.
 - **Co-location:** the test ships in the same task that writes the code — never deferred, never "covered elsewhere."
 - **Gate:** nothing is "done" until its tests exist and pass. Run them and report results (counts, pass/fail). Cite `file:line` for each acceptance criterion — an AC with no citation counts as *not covered*.
-- **Discrimination check (the part most skip):** after tests pass, mutate 1–2 spots in the new code — flip a condition, change a return, drop an edge case. If the tests still pass, they're weak → strengthen them. Tests must *detect regressions*, not just assert that something ran.
+- **Discrimination check (the part most skip):** after tests pass, prove the tests bite. For high-risk logic, mutate 1–2 spots in the new code — flip a condition, change a return, drop an edge case — and confirm a test fails. For low-risk glue, a targeted regression check plus reviewer pass can stand in. Tests must *detect regressions*, not just assert that something ran.
 - Never use skip / disable / pending / `.only` to make a suite look green.
 - If something genuinely can't be tested, say so explicitly and explain why — never silently ship unverified code.
 - **Depth** — spec-derived tests & the test-after overfit trap, anti-patterns, level selection, the discrimination procedure, tooling: [references/testing.md](references/testing.md).
