@@ -29,6 +29,7 @@ Assess scope before doing anything, then apply only what the size needs. Depth i
 ## 2. Scope discipline (don't bloat)
 
 - **Investigate before you build.** Writing new code is the *last* resort, not the first instinct. Before creating anything, check whether it already exists and is well-supported — in this project (`cc2`), its dependencies, the language's stdlib, the framework's built-ins, the platform you deploy on, or a mature OSS/managed system for non-core domain work. Climb that ladder and stop at the first rung that holds; write new code only when nothing above it fits. (Full ladder + how to apply it per layer: [references/architecture.md](references/architecture.md).)
+- **Run the canonical operation; don't handcraft its output.** Prefer the ecosystem's supported initializer, generator, migration, formatter, package-manager, or platform command. Use safe non-interactive flags when possible; if it genuinely requires user choices, credentials, browser authorization, or an unavailable TTY, guide the user through running it in another terminal and continue from the resulting files.
 - **Lazy about the solution, never about diligence:** staying lean never justifies cutting input validation, error/data-loss handling, security, or accessibility. Those are always in scope.
 - Build exactly what was asked — no speculative features, no "while I'm here" extras.
 - **Name the boundary:** state what's **in scope** and **out of scope** before building — one line each. Naming the edge prevents scope creep better than any process gate.
