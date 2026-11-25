@@ -4,7 +4,7 @@ description: Spec-driven delivery sized to the task, with scope, acceptance crit
 license: CC-BY-4.0
 metadata:
   author: rrghost
-  version: 0.2.0
+  version: 0.3.0
 ---
 
 # Go Lean SDD
@@ -26,7 +26,7 @@ Instructions, not scaffolding: one spec file when the work earns it, nothing els
 
 - **Investigate before you build.** New code is the last resort: climb the reuse ladder (this project, its dependencies, stdlib, framework, platform, a mature external system for non-core domains) and stop at the first rung that holds — [references/architecture.md](references/architecture.md).
 - **Run the canonical operation; don't handcraft its output.** Prefer the ecosystem's supported initializer, generator, migration, formatter, package-manager, or platform command. Use safe non-interactive flags when possible; if it genuinely requires user choices, credentials, browser authorization, or an unavailable TTY, guide the user through running it in another terminal and continue from the resulting files.
-- **Lazy about the solution, never about diligence:** staying lean never justifies cutting input validation, error/data-loss handling, security, or accessibility. Those are always in scope.
+- **Lazy about the solution, never about diligence:** staying lean never justifies cutting input validation, error/data-loss handling, security, accessibility or the system's invariants. Lean means less code, not weaker guarantees. Those are always in scope.
 - **Name the boundary:** **in** scope, **out** of scope, and what must stay **unchanged** — one line each. Each risky "unchanged" gets a regression test.
 - **Decompose first:** if the request spans 2+ independent subsystems, split it and confirm the split before speccing.
 - **Brownfield = deltas:** describe what *changes* (added / modified / removed), not the whole existing system.
@@ -45,6 +45,7 @@ Instructions, not scaffolding: one spec file when the work earns it, nothing els
 
 **DESIGN — pin down HOW (Large only).**
 - **Default shape:** a well-modularised monolith / monorepo, not premature microservices — clear module boundaries and explicit interfaces.
+- **Invariants first.** List what must never happen — from the request, and by asking "if this ran a year with real users, what would break?". For each, research and weigh two ways to guarantee it, and pick the strongest one the stack enforces by itself (a constraint, a transaction, a type, a framework scope) over a check the code must remember. Record each in Decisions with its source.
 - Note the approach, key components and any new pattern — only what informs the build. Add a Mermaid diagram when a flow crosses 3+ components — [references/diagrams.md](references/diagrams.md).
 
 **TASKS — vertical slices (Large only).**
@@ -65,14 +66,14 @@ The heart of this skill: real, *discriminating* tests. What separates solid work
 - Test at the right level: unit for logic, integration/e2e for user-visible behavior.
 - **Co-location:** the test ships in the same task that writes the code — never deferred, never "covered elsewhere."
 - **Gate:** nothing is "done" until its tests exist and pass. Run them and report results (counts, pass/fail). Cite `file:line` for each acceptance criterion — an AC with no citation counts as *not covered*.
-- **Discrimination check (the part most skip):** after tests pass, prove the tests bite. For high-risk logic, mutate 1–2 spots in the new code — flip a condition, change a return, drop an edge case — and confirm a test fails. For low-risk glue, a targeted regression check plus reviewer pass can stand in.
+- **Discrimination check (the part most skip):** after tests pass, prove the tests bite. For high-risk logic, start with the invariant guards: mutate 1–2 spots in the new code — flip a condition, change a return, drop an edge case — and confirm a test fails. For low-risk glue, a targeted regression check plus reviewer pass can stand in.
 - Never use skip / disable / pending / `.only` to make a suite look green.
 - If something genuinely can't be tested, say so explicitly and explain why — never silently ship unverified code.
 - **Depth** — spec-derived tests & the test-after overfit trap, anti-patterns, level selection, the discrimination procedure, tooling: [references/testing.md](references/testing.md).
 
 ## 5. Knowledge & honesty
 
-Verify, don't assume: existing code → project docs → official library docs → web. Use the code search and doc tools the project's `AGENTS.md` names. Never fabricate APIs, flags, or behavior; "I couldn't verify X" beats a confident guess.
+Verify, don't assume: existing code → project docs → official library docs → web. Use what is installed and what the project's `AGENTS.md` names: semantic code search and code maps (e.g. `cc2`, `xray`) for the existing system, current library docs (e.g. `ctx7`), and live web research for primary sources and alternatives (e.g. `exa-search`, or the harness's web search). A decision taken without a source says so in the spec. Never fabricate APIs, flags, or behavior; "I couldn't verify X" beats a confident guess.
 
 ## 6. The spec and durable context
 
