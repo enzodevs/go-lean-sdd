@@ -9,7 +9,7 @@ the first move. Be lazy about the *solution*, never about the *reading*.
 Before adding any code or dependency, stop at the first rung that holds:
 
 1. **Does this need to exist at all?** No → don't build it.
-2. **Does this project already do it?** Reuse it. (`cc2` to find it, `xray` to read it.)
+2. **Does this project already do it?** Reuse it. (Search the code before assuming.)
 3. **Does the language stdlib / runtime do it?** Use it.
 4. **Does a dependency you already have do it?** Use it.
 5. **Does the framework or platform provide it as a supported, maintained feature?** Use that.

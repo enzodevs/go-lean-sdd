@@ -70,7 +70,7 @@ If nothing fails, the test is decorative — strengthen the assertion or add the
 
 Tests, types, and lint run constantly in the build loop, so **a slow gate is a skipped gate — speed is a feature.** And a batteries-included runner means less test scaffolding to hand-write: the reuse-first ladder applies to your test stack too.
 
-- **Use the project's existing runner** — don't introduce a second one. (`cc2`/grep the repo first.)
-- **Choosing for a new project:** prefer fast + batteries-included that is *mature enough for your needs*; weigh maturity and rule flexibility against speed. Modern engines often win here (e.g. in the TS ecosystem a Vite-powered runner over a heavier legacy one; a fast Rust-based linter where its rule coverage already suffices). These move fast — confirm the current state via `context7` rather than trusting a fixed recommendation.
+- **Use the project's existing runner** — don't introduce a second one. (Search the repo first.)
+- **Choosing for a new project:** prefer fast + batteries-included that is *mature enough for your needs*; weigh maturity and rule flexibility against speed. Modern engines often win here (e.g. in the TS ecosystem a Vite-powered runner over a heavier legacy one; a fast Rust-based linter where its rule coverage already suffices). These move fast — confirm the current state in the official docs rather than trusting a fixed recommendation.
 - **Record the project's chosen stack in its `AGENTS.md`**, not in this skill — same rule as platform products. This reference stays tool-agnostic.
 - **Always run the suite and report real output.** Never claim "tests pass" without the run and its counts.
