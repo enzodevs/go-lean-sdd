@@ -42,7 +42,12 @@ Assess scope before doing anything, then apply only what the size needs. Depth i
 
 **SPECIFY — pin down WHAT.**
 - State the requirement in 1–2 sentences. Write acceptance criteria as **Given / When / Then** scenarios — they read as tests, which primes verifiable behavior over implementation detail.
-- Surface gray areas: list assumptions and ambiguities, tagging real unknowns `[NEEDS CLARIFICATION]`. Before finalizing a Medium or Large spec, present material unresolved decisions through the environment's structured user-question interface when available, otherwise as concise numbered options; include a recommended default and each choice's consequence. Wait for answers, apply them to the spec, remove resolved tags, and confirm the material spec changes before Execute. Skip this checkpoint when no material ambiguity exists.
+- Surface gray areas: list assumptions and ambiguities, tagging real unknowns `[NEEDS CLARIFICATION]`. Skip the checkpoint below when no material ambiguity exists.
+- **Clarify by interview (Medium/Large with material decisions, or when the user asks to be grilled).** Map the open decisions as a design tree: each decision branches into the ones that depend on it.
+  - Facts are yours, decisions are the user's: look up anything the code, docs or tools can answer before asking.
+  - Ask the **frontier** (decisions whose prerequisites are settled) in rounds — one question at a time if the user prefers. Number each question, give your recommended answer and its consequence, and word it so "yes" accepts the recommendation. Use the structured user-question interface when available.
+  - Each answer reshapes the tree; recompute the frontier. A question that depends on another open one waits for a later round.
+  - Done when every branch is visited and nothing is silently assumed. Summarize the shared understanding, get the user's confirmation, then write the decisions into the spec and remove resolved tags. No code during the interview.
 
 **DESIGN — pin down HOW (Large only).**
 - Check what already exists first — this project's code (`cc2` to find it, `xray` to read structure), its dependencies, and what your stack or platform already provides as a supported feature. Build on those before adding anything new.
