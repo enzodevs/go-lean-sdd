@@ -29,7 +29,7 @@ The skill sizes planning to the task. Complexity earns depth, so trivial and med
 
 Tests are not optional here. Every change ships with co-located tests, and a discrimination check then mutates the new code to confirm a test actually fails. That is how you tell a test that catches regressions from one that only looks green.
 
-It also keeps the repo clean. There is no scaffolding tree and no status file to go stale, just a single `AGENTS.md` that holds the durable context. Before writing new code, the skill climbs a reuse ladder through your project, your dependencies, the standard library, the framework, the platform, and mature external systems for non-core domains. It writes something new only when nothing above it fits.
+It also keeps the repo clean. Medium and large changes get one spec file each, kept short and current, and `AGENTS.md` holds the durable context. A bundled Bun script creates, checks and archives specs so agents never do it by hand. Before writing new code, the skill climbs a reuse ladder through your project, your dependencies, the standard library, the framework, the platform, and mature external systems for non-core domains. It writes something new only when nothing above it fits.
 
 ## Install
 
@@ -45,9 +45,21 @@ Four phases, applied only as deep as the task earns:
 
 | Scope | Specify | Design | Tasks | Execute |
 |---|---|---|---|---|
-| Trivial (3 files or fewer, one sentence) | one line, inline | skip | skip | implement and test |
-| Medium (clear feature, under 10 steps) | brief, with edge cases | inline | implicit | implement and test each step |
-| Large (multi-component or ambiguous) | full, with requirement IDs | approach and reuse | atomic breakdown | implement, test, and verify each task |
+| Trivial (1–2 files, or a fix with a failing test) | one line, inline | skip | skip | implement and test |
+| Medium (3+ files in one module) | spec file, brief | inline | implicit | implement and test each step |
+| Large (crosses modules, schema or public API, open decisions) | spec file, full | approach | vertical slices | implement, test, and verify each slice |
+
+Medium and large specs start with an interview: the agent looks up every fact itself, then walks the open decisions one branch at a time, each question with a recommended answer. Say "fast" to have it ask only product decisions and settle the technical ones from the stack's official docs.
+
+## Spec operations
+
+```sh
+bun scripts/golean.ts new "Title" [--lang pt]   # golean/specs/NNN-title/spec.md with the fixed sections
+bun scripts/golean.ts status 12 in-progress     # draft | in-progress
+bun scripts/golean.ts check [12]                # sections and size; warns, never blocks
+bun scripts/golean.ts close 12                  # archive it and repoint links
+bun scripts/golean.ts list [--all]              # add --json for agents
+```
 
 Specify and Execute always run. Design and Tasks switch on only when the work needs them. The full skill lives in [`SKILL.md`](SKILL.md), and the deeper guidance loads on demand from [`references/`](references/).
 
